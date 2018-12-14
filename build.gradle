@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "27.0.3"
+
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+repositories {
+    maven{url"https://maven.google.com"}
+    jcenter()
+    maven{url 'https://jitpack.io'}
+    maven {url 'http://developer.huawei.com/repo'}
+    maven { url 'https://fabric-artifacts.s3.amazonaws.com/public' }
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(path:':farwolf.weex')
+    compile project(path:':uikit')
+}
+
+//apply plugin: 'com.google.gms.google-services'
