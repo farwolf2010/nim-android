@@ -33,7 +33,7 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path:':farwolf.weex')
-    compile project(path:':uikit')
+    compile project(path:':NIMKit')
 }
 
 //apply plugin: 'com.google.gms.google-services'

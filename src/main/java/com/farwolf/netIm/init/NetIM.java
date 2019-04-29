@@ -14,7 +14,9 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.nimlib.sdk.msg.MessageNotifierCustomization;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.UserInfo;
 
@@ -41,7 +43,7 @@ public class NetIM {
     }
 
     // 如果返回值为 null，则全部使用默认参数。
-    public static SDKOptions options(Context context) {
+    public   SDKOptions options(Context context) {
         SDKOptions options = new SDKOptions();
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
@@ -72,7 +74,7 @@ public class NetIM {
 
 
         options.thumbnailSize = wm.getDefaultDisplay().getWidth()/2;
-
+        options.messageNotifierCustomization = messageNotifierCustomization;
         // 用户资料提供者, 目前主要用于提供用户资料，用于新消息通知栏中显示消息来源的头像和昵称
         options.userInfoProvider = new UserInfoProvider() {
             @Override
@@ -109,7 +111,22 @@ public class NetIM {
         };
         return options;
     }
+    private MessageNotifierCustomization messageNotifierCustomization = new MessageNotifierCustomization() {
+        @Override
+        public String makeNotifyContent(String nick, IMMessage message) {
+            return null; // 采用SDK默认文案
+        }
 
+        @Override
+        public String makeTicker(String nick, IMMessage message) {
+            return null; // 采用SDK默认文案
+        }
+
+        @Override
+        public String makeRevokeMsgTip(String s, IMMessage imMessage) {
+            return null;
+        }
+    };
     // 如果已经存在用户登录信息，返回LoginInfo，否则返回null即可
     private LoginInfo loginInfo() {
         return null;
